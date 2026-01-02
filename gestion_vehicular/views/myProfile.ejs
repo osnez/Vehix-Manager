@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi perfil</title>
+  <link rel="shortcut icon" href="img/mobile-logo.png">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/myProfile.css">
+  <script defer src="/js/userProfile.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="<%= user.rol === 'ADMINISTRADOR' ? '/admin/' : '/prop/' %>">
+      <img src="/img/mobile-logo.png" alt="" class="logo" />
+    </a>
+  </header>
+
+  <div class="container">
+    <div class="menu">
+      <h1>
+        <%= user.nombre + ' ' + user.ap1 + ' ' + user.ap2 %>
+      </h1>
+      <button class="button-menu" id="open-modal1">Actualiza tu informacion</button>
+      <button class="button-menu" id="open-modal2">Cambia tu contraseña</button>
+      <button class="button-menu" id="open-modal3">Cambiar foto de perfil</button>
+    </div>
+
+    <div class="image-container">
+      <img src="<%= user.foto %>" alt="Foto de perfil">
+    </div>
+
+    <span class="title">Mi perfil</span>
+
+
+    <!-- Modal Information -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <span class="close" data-modal="modal1">&times;</span>
+        <h2>Actualiza tu informacion</h2>
+        <form action="/actualizarInfo" method="post">
+          <div class="inputs">
+            <label>Nombre</label>
+            <input type="text" name="name" maxlength="50" value="<%= user.nombre %>" required>
+          </div>
+          <div class="inputs">
+            <label>Apellido Paterno</label>
+            <input type="text" name="ap1" maxlength="50" value="<%= user.ap1 %>" required>
+          </div>
+          <div class="inputs">
+            <label>Apellido Materno</label>
+            <input type="text" name="ap2" maxlength="50" value="<%= user.ap2 %>" required>
+          </div>
+          <div class="inputs">
+            <label>Correo Electronico</label>
+            <input type="email" name="email" maxlength="50" value="<%= user.correo %>" required>
+          </div>
+          <button type="submit">Actualizar Informacion</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Password -->
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <span class="close" data-modal="modal2">&times;</span>
+        <h2>Actualiza tu contraseña</h2>
+        <form action="/actualizarContrasena" method="post">
+          <div class="inputs">
+            <label>Nueva Contraseña</label>
+            <input type="password" name="pass" maxlength="50" required>
+          </div>
+          <button type="submit">Cambiar contraseña</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Image Profile -->
+    <div id="modal3" class="modal">
+      <div class="modal-content">
+        <span class="close" data-modal="modal3">&times;</span>
+        <h2>Cambiar foto de perfil</h2>
+        <div class="user-image-container">
+          <label class="custum-file-upload" for="file">
+            <div class="preview-image">
+              <img src="<%= user.foto %>" alt="" id="preview">
+            </div>
+            <div class="text">
+              <span>Click para cargar imagen</span>
+            </div>
+            <form action="/actualizarFoto" method="post" enctype="multipart/form-data">
+              <input type="file" id="file" name="image" value="%= user.foto %" required>
+              <button type="submit">Cambiar foto</button>
+            </form>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

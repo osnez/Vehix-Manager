@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programar Mantenimiento</title>
+    <link rel="shortcut icon" href="/img/mobile-logo.png">
+    <link rel="stylesheet" href="/css/register.css">
+    <script defer src="/js/register.js"></script>
+</head>
+
+<body>
+
+    <div class="formContainer">
+        <form action="/admin/registrarMantenimiento" method="post">
+            <h2>Programar Mantenimiento</h2>
+
+            <div class="inputs">
+                <label>No. Economico</label>
+                <input type="text" name="economic_num_visible" value="<%= id %>" disabled required>
+                <input type="hidden" name="economic_num" value="<%= id %>">
+            </div>
+
+            <div class="inputs">
+                <label>Destino</label>
+                <input type="text" name="destination" required>
+            </div>
+
+            <div class="inputs">
+                <label>Fecha</label>
+                <input type="date" name="begin_date" required>
+            </div>
+
+            <div class="inputs">
+                <label>Costo</label>
+                <input type="number" step="0.01" name="cost" required>
+            </div>
+
+            <button type="submit">Registrar</button>
+            <div class="logo">
+                <img src="/img/desktop-logo.png" />
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

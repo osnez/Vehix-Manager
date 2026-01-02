@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asignaciones</title>
+  <link rel="shortcut icon" href="/img/mobile-logo.png">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tables.css">
+</head>
+
+<body>
+
+  <% 
+  // Función para formatear la fecha en formato 'dd/MM/yyyy'
+  function formatDate(dateString) {
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('es-ES', options);
+  }
+%>
+
+  <header>
+    <a href="/admin/detalle/<%= id %>">
+      <img src="/img/mobile-logo.png" alt="" />
+    </a>
+  </header>
+
+  <div class="container">
+    <div class="search-bar-container">
+      <div class="search-bar">
+        <form action="#">
+          <input type="text" class="search-bar" placeholder="Buscar por nombre" />
+          <button type="submit">
+            <i class="bx bx-search-alt-2"></i>
+          </button>
+        </form>
+      </div>
+      <h1>Lista de asignaciones</h1>
+    </div>
+    <% if (history.length > 0) { %>
+      <% history.forEach(hist => { %>
+      <div class="card">
+        <div class="image-container">
+          <img src="/img/mobile-logo.png" alt="" class="logo">
+          <img src="<%= hist.foto %>" alt="Foto de usuario" class="image">
+        </div>
+        <div class="info-container">
+          <div class="info">
+            <h1>Unidad asignada a:</h1>
+            <h1><%= hist.nombre + ' ' + hist.ap1 + ' ' + hist.ap2 %></h1>
+            <h1>Fecha de asignacion:</h1>
+            <h1><%= formatDate(hist.fecha_asignacion) + ' - ' + formatDate(hist.fecha_liberacion) %></h1>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+      <% } else { %>
+        <div class="card-container">
+          <h1>No hay asignaciones registradas para este vehiculo.</h1>
+        </div>
+      <% } %>
+  </div>
+
+</body>
+
+</html>

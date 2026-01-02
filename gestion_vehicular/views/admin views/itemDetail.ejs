@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del vehiculo</title>
+  <link rel="shortcut icon" href="/img/mobile-logo.png">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- BOX ICONS -->
+  <link rel="stylesheet" href="/css/itemDetail.css">
+  <script defer src="/js/itemDetail.js"></script>
+</head>
+
+<body>
+
+  <header>
+    <a href="/admin/">
+      <i class="bx bx-left-arrow"></i>
+    </a>
+    <img src="/img/mobile-logo.png" alt="" />
+  </header>
+
+  <main>
+    <section class="slides slide1">
+      <div class="vehicle-container">
+        <img src="<%= vehicle.foto_unidad %>" alt="Vehículo CFE" class="vehicle-image">
+        <div class="vehicle-owner">
+          <img src="<%= vehicle.foto_prop %>" alt="">
+          <div class="owner-info">
+            <h1>Responsable de la unidad</h1>
+            <h3>
+              <%= vehicle.nombre_prop + ' ' + vehicle.ap1_prop + ' ' + vehicle.ap2_prop %>
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="info-card">
+        <h1>
+          <%= vehicle.placa %>
+        </h1>
+        <h2>
+          <%= vehicle.marca + ' ' + vehicle.submarca %>
+        </h2>
+        <h3>
+          <%= vehicle.descripcion %>
+        </h3>
+        <h3>Transm: <%= vehicle.transmision %>
+        </h3>
+        <div class="sub-info">
+          <h3>Mod. <%= vehicle.modelo %>
+          </h3>
+          <h3>Cilindros <%= vehicle.cilindros %>
+          </h3>
+        </div>
+        <h3 class="situation">Situacion: <strong>
+            <%= vehicle.situacion %>
+          </strong></h3>
+      </div>
+    </section>
+
+    <section class="slides slide2">
+      <% if(detail) {%>
+      <h1 class="section-title">Estado del vehiculo: <strong class="<%= detail.estado_fisico === 'BUENO' ? 'situacion-buena' :
+          detail.estado_fisico === 'MALO' ? 'situacion-mala' :
+        'situacion-neutral' %>">
+          <%= detail.estado_fisico %>
+        </strong></h1>
+
+      <div class="user-card">
+        <% if(assign) { %>
+        <img src="<%= assign.foto %>" alt="Avatar de Usuario" class="avatar">
+        <% } %>
+        <div class="assignament-info">
+          <% if(assign) { %>
+            <h2>Unidad asignada a:</h2>
+          <h3><%= assign.nombre + ' ' + assign.ap1 + ' ' + assign.ap2 %></h2>
+          <% } else { %>
+            <h3>Esta unidad aun no ha sido asignada</h3>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="svg-container">
+        <h2 class="svg-title">Combustible Actual</h2>
+        <object id="svgObject" data="/img/Medidor de gasolina.svg" type="image/svg+xml" width="500"
+          height="500"></object>
+        <input type="range" id="nivel" min="0" max="100" value="<%= detail.nivel %>">
+      </div>
+
+      <div class="tires-container">
+        <h2 class="tires-title">Estado de los neumaticos</h2>
+        <div class="image-wrapper">
+          <div class="image-wrapper">
+            <div class="image-item">
+              <img id="tire-bn1" src="/img/tire.png" alt="Imagen 1" class="base-image">
+              <img id="tire-color1" src="/img/tire.png" alt="Overlay 1" class="overlay-image">
+              <div class="tire-submenu">
+                <h1>Neumatico Trasero Izq.</h1>
+                <h1>Vida del neumatico: <%= detail.estadoN3 %>%</h1>
+              </div>
+            </div>
+            <div class="image-item">
+              <img id="tire-bn2" src="/img/tire.png" alt="Imagen 2" class="base-image">
+              <img id="tire-color2" src="/img/tire.png" alt="Overlay 2" class="overlay-image">
+              <div class="tire-submenu">
+                <h1>Neumatico Delantero Izq.</h1>
+                <h1>Vida del neumatico: <%= detail.estadoN1 %>%</h1>
+              </div>
+            </div>
+            <div class="image-item">
+              <img id="tire-bn3" src="/img/tire.png" alt="Imagen 3" class="base-image">
+              <img id="tire-color3" src="/img/tire.png" alt="Overlay 3" class="overlay-image">
+              <div class="tire-submenu">
+                <h1>Neumatico Trasero Der.</h1>
+                <h1>Vida del neumatico: <%= detail.estadoN4 %>%</h1>
+              </div>
+            </div>
+            <div class="image-item">
+              <img id="tire-bn4" src="/img/tire.png" alt="Imagen 4" class="base-image">
+              <img id="tire-color4" src="/img/tire.png" alt="Overlay 4" class="overlay-image">
+              <div class="tire-submenu">
+                <h1>Neumatico Frontal Der.</h1>
+                <h1>Vida del neumatico: <%= detail.estadoN2 %>%</h1>
+              </div>
+            </div>
+
+            <input type="range" id="tireStatus1" min="0" max="100" value="<%= detail.estadoN3 %>">
+            <input type="range" id="tireStatus2" min="0" max="100" value="<%= detail.estadoN1 %>">
+            <input type="range" id="tireStatus3" min="0" max="100" value="<%= detail.estadoN4 %>">
+            <input type="range" id="tireStatus4" min="0" max="100" value="<%= detail.estadoN2 %>">
+          </div>
+        </div>
+
+        <% } else { %>
+          <h1>ESTE VEHICULO AUN NO HA SIDO INSPECCIONADO</h1>
+          <h1>Por favor realice la inspeccion</h1>
+        <% } %>
+    </section>
+
+    <section id="tarjetas" class="slides slide3">
+      <h2 class="section-title">INFORMACION DE VEHICULO</h2>
+      <div class="cards-container">
+        <!-- Tarjeta 1 -->
+        <a href="/admin/documentos/<%= vehicle.num_economico %>" class="card">
+          <img src="/img/document-27664_1280.png" alt="Imagen 1" class="card-image">
+          <div class="card-content">
+            <h3 class="card-title">Documentos</h3>
+          </div>
+        </a>
+        <!-- Tarjeta 2 -->
+        <a href="/admin/mantenimiento/<%= vehicle.num_economico %>" class="card">
+          <img src="/img/toolbox-306888_1280.png" alt="Imagen 2" class="card-image">
+          <div class="card-content">
+            <h3 class="card-title">Mantenimientos</h3>
+          </div>
+        </a>
+        <!-- Tarjeta 3 -->
+        <a href="/admin/reparacion/<%= vehicle.num_economico %>" class="card">
+          <img src="/img/skidmarks-148921_1280.png" alt="Imagen 3" class="card-image">
+          <div class="card-content">
+            <h3 class="card-title">Reparaciones</h3>
+          </div>
+        </a>
+        <!-- Tarjeta 4 -->
+        <a href="/admin/seguro/<%= vehicle.num_economico %>" class="card">
+          <img src="/img/car-insurance-7716229_1280.png" alt="Imagen 4" class="card-image">
+          <div class="card-content">
+            <h3 class="card-title">Seguros</h3>
+          </div>
+        </a>
+        <!-- Tarjeta 5 -->
+        <a href="/admin/infracciones/<%= vehicle.num_economico %>" class="card">
+          <img src="/img/policía-tránsito-multa-infracción.jpg" alt="Imagen 5" class="card-image">
+          <div class="card-content">
+            <h3 class="card-title">Infracciones</h3>
+          </div>
+        </a>
+        <!-- Tarjeta 6 -->
+        <a href="/admin/accidentes/<%= vehicle.num_economico %>" class="card">
+          <img src="/img/sign-2864889_1280.png" alt="Imagen 7" class="card-image">
+          <div class="card-content">
+            <h3 class="card-title">Registro de Accidentes</h3>
+          </div>
+        </a>
+
+         <!-- Tarjeta 7 -->
+         <a href="/admin/asignaciones-vehiculo/<%= vehicle.num_economico %>" class="card">
+          <img src="/img/audit-6904474_1280.png" alt="Imagen 7" class="card-image">
+          <div class="card-content">
+            <h3 class="card-title">Historial de asignaciones</h3>
+          </div>
+        </a>
+
+      </div>
+      
+    </section>
+  </main>
+</body>
+
+</html>

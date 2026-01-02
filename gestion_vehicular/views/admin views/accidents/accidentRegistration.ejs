@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Accidente</title>
+    <link rel="shortcut icon" href="img/mobile-logo.png">
+    <link rel="stylesheet" href="/css/register.css">
+    <script defer src="/js/register.js"></script>
+</head>
+
+<body>
+    <div class="formContainer">
+        <% if(assignDetail) { %>
+        <form action="/admin/registrarAccidente" method="post">
+            <h2>Registrar Accidente</h2>
+
+            <input type="text" name="vehicleId" value="<%= id %>" hidden required>
+            <input type="text" name="userId" value="<%= assignDetail.idUsuario %>" hidden required>
+            <div class="inputs">
+                <label>Nombre de involucrado</label>
+                <input type="text" name="name" value="<%= assignDetail.nombre + ' ' + assignDetail.ap1 %>" disabled >
+            </div>
+            <div class="inputs">
+                <label>fecha</label>
+                <input type="date" name="date" required>
+            </div>
+            <div class="inputs">
+                <label>Hora</label>
+                <input type="time" name="time" required>
+            </div>
+
+            <button type="submit">Registrar Accidente</button>
+            <div class="logo">
+                <img src="/img/desktop-logo.png" />
+            </div>
+        </form>
+        <% } else { %>
+            <h1>ESTA UNIDAD NO HA SIDO ASIGNADA</h1>
+        <% } %>    
+    </div>
+</body>
+
+</html>

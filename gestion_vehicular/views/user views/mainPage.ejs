@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagina Principal</title>
+  <link rel="shortcut icon" href="img/mobile-logo.png">
+  <link rel="stylesheet" href="/css/userAssignament.css">
+  <script defer src="/js/itemDetail.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="profile-icon">
+        <img src="<%= user.foto %>" alt="Perfil">
+        <div class="dropdown-menu">
+          <h3> <%= user.nombre + ' ' + user.ap1 + ' ' + user.ap2 %> </h3>
+          <a href="/mi-perfil">Perfil</a>
+          <a href="/logout">Cerrar Sesion</a>
+        </div>
+      </div>
+    </div>
+
+    <% if(assign) { %>
+    <div class="main-content">
+      <div class="vehicle-info">
+        <img src="<%= assign.foto_unidad %>" alt="Vehículo" class="vehicle-image">
+        <div class="vehicle-details">
+          <h1><%= assign.marca + ' ' + assign.submarca %></h1>
+          <h2>Placa: <%= assign.placa %></h2>
+          <p>Responsable de la unidad: <%= assign.nombre + ' ' + assign.ap1 + ' ' + assign.ap2 %></p>
+          <p>Transmisión: <%= assign.transmision %></p>
+          <p>Modelo: <%= assign.modelo %></p>
+          <div class="vehicle-id"><%= assign.num_economico %></div>
+        </div>
+      </div>
+
+      <div class="vehicle-status">
+        <h2>ESTADO DEL VEHÍCULO: <strong class="<%= assign.estado_fisico === 'BUENO' ? 'situacion-buena' :
+          assign.estado_fisico === 'MALO' ? 'situacion-mala' :
+        'situacion-neutral' %>">
+          <%= assign.estado_fisico %>
+        </strong></h2>
+        <div class="status-icons">
+          <div class="fuel-status">
+            <object id="svgObject" data="/img/Medidor de gasolina.svg" type="image/svg+xml" width="500"
+              height="500"></object>
+              <input type="range" id="nivel" min="0" max="100" value="<%= assign.nivel %>">
+            <div class="title">COMBUSTIBLE</div>
+          </div>
+
+          <div class="tire-status">
+            <div class="tires-container">
+              <div class="image-wrapper">
+                <div class="image-wrapper">
+                  <div class="image-item">
+                    <img id="tire-bn1" src="/img/tire.png" alt="Imagen 1" class="base-image">
+                    <img id="tire-color1" src="/img/tire.png" alt="Overlay 1" class="overlay-image">
+                    <div class="tire-submenu">
+                      <h1>Neumatico Trasero Izq.</h1>
+                      <h1>Vida del neumatico: <%= assign.estadoN3 %>%</h1>
+                    </div>
+                  </div>
+                  <div class="image-item">
+                    <img id="tire-bn2" src="/img/tire.png" alt="Imagen 2" class="base-image">
+                    <img id="tire-color2" src="/img/tire.png" alt="Overlay 2" class="overlay-image">
+                    <div class="tire-submenu">
+                      <h1>Neumatico Delantero Izq.</h1>
+                      <h1>Vida del neumatico: <%= assign.estadoN1 %>%</h1>
+                    </div>
+                  </div>
+                  <div class="image-item">
+                    <img id="tire-bn3" src="/img/tire.png" alt="Imagen 3" class="base-image">
+                    <img id="tire-color3" src="/img/tire.png" alt="Overlay 3" class="overlay-image">
+                    <div class="tire-submenu">
+                      <h1>Neumatico Trasero Der.</h1>
+                      <h1>Vida del neumatico: <%= assign.estadoN4 %>%</h1>
+                    </div>
+                  </div>
+                  <div class="image-item">
+                    <img id="tire-bn4" src="/img/tire.png" alt="Imagen 4" class="base-image">
+                    <img id="tire-color4" src="/img/tire.png" alt="Overlay 4" class="overlay-image">
+                    <div class="tire-submenu">
+                      <h1>Neumatico Frontal Der.</h1>
+                      <h1>Vida del neumatico: <%= assign.estadoN2 %>%</h1>
+                    </div>
+                  </div>
+
+                  <input type="range" id="tireStatus1" min="0" max="100" value="<%= assign.estadoN3 %>">
+                  <input type="range" id="tireStatus2" min="0" max="100" value="<%= assign.estadoN1 %>">
+                  <input type="range" id="tireStatus3" min="0" max="100" value="<%= assign.estadoN4 %>">
+                  <input type="range" id="tireStatus4" min="0" max="100" value="<%= assign.estadoN2 %>">
+                </div>
+              </div>
+              <div class="title2">NEUMÁTICOS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }else { %>
+      <div class="main-content">
+        <h1>NO TIENE UNA UNIDAD ASIGNADA O LA UNIDAD NO HA SIDO INSPECCIONADA</h1>
+        <p>Por favor, intente más tarde o póngase en contacto con el responsable
+          correspondiente para asistencia inmediata. </p>
+      </div>
+    <% } %>
+</body>
+
+</html>

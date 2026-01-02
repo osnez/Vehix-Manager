@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  background-color: #f4f4f4;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  position: absolute;
+  top: 2%;
+  left: 5%;
+  transition: scale 1s;
+}
+
+img {
+  width: 80px;
+  height: 100%;
+}
+
+a:hover img {
+  transform: scale(1.05);
+}
+
+
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+header {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.header-info div {
+  margin-bottom: 0.5rem;
+}
+
+.vehicle-info {
+  margin-bottom: 2rem;
+}
+
+.vehicle-info div {
+  margin-bottom: 8px;
+}
+
+.vehicle-info h2 {
+  color: #08905c;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+  color: #08905c;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+select,
+input[type="range"] {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+select:focus,
+input[type="range"]:focus {
+  border-color: #08905c;
+  outline: none;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  background: #ddd;
+  height: 8px;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #08905c;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #08905c;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.tires-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tire {
+  flex: 1;
+  min-width: 200px;
+}
+
+.tire label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.tire output {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+.radio-buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.radio-button {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.radio-button__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-button__label {
+  display: inline-block;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  position: relative;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.radio-button__custom {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #555;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.radio-button__input:checked+.radio-button__label .radio-button__custom {
+  transform: translateY(-50%) scale(0.9);
+  border: 5px solid #08905c;
+  color: #08905c;
+}
+
+.radio-button__input:checked+.radio-button__label {
+  color: #08905c;
+}
+
+.radio-button__label:hover .radio-button__custom {
+  transform: translateY(-50%) scale(1.2);
+  border-color: #08905c;
+  box-shadow: 0 0 10px #076b2980;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #08905c;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #0ec47e;
+}

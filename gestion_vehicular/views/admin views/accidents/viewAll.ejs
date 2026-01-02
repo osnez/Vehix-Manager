@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reparaciones</title>
+  <link rel="shortcut icon" href="/img/mobile-logo.png">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- BOX ICONS -->
+  <link rel="stylesheet" href="/css/tables.css">
+</head>
+
+<body>
+  
+  <% 
+    // Función para formatear la fecha en formato 'dd/MM/yyyy'
+    function formatDate(dateString) {
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      const date = new Date(dateString);
+      return date.toLocaleDateString('es-ES', options);
+    }
+  %>
+
+  <header>
+    <a href="/admin/detalle/<%= id %>">
+      <img src="/img/mobile-logo.png" alt="" />
+    </a>
+    <a href="/admin/registrar-accidente/<%= id %>" class="cssbuttons-io-button">
+      <i class="bx bx-plus-circle"></i>
+      <span>Registrar Accidente</span>
+    </a>
+  </header>
+  
+  <main class="container">
+    <section class="card-container">
+      <h1>Registro de accidentes</h1>
+
+      <% if (accidents.length > 0) { %>
+        <% accidents.forEach(item => { %>
+      <div class="card">
+        <div class="image-container">
+          <img src="/img/mobile-logo.png" alt="" class="logo">
+          <img src="<%= item.foto %>" alt="Foto" class="image">
+          <h1></h1>
+        </div>
+        <div class="info-container">
+          <div class="info">
+            <h1>Involucrado: <%= item.nombre + ' ' + item.ap1 + ' ' + item.ap2 %></h1>
+            <h1>Placa del vehiculo: <%= item.placa %></h1>
+            <h1>Fecha: <%= formatDate(item.fecha) %></h1>
+            <h1>Hora: <%= item.hora %></h1>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+      <% } else { %>
+        <p>No hay accidentes registrados para este vehiculo.</p>
+      <% } %>
+    </section>
+  </main>
+</body>
+
+</html>

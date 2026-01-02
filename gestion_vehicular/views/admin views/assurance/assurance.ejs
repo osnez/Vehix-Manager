@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor de Archivos</title>
+  <link rel="stylesheet" href="/css/documents.css">
+</head>
+
+<body>
+  <a href="/admin/detalle/<%= vehicleId %>" class="logo">
+    <img src="/img/mobile-logo.png" alt="" />
+  </a>
+
+  <div class="container">
+    <h1>Polizas de seguro del vehiculo</h1>
+    <h1><%= vehicleId %></h1>
+    <button class="btn btn-primary" data-toggle="modal">Subir Archivo</button>
+
+    <% if(files.length > 0) { %>
+    <div class="row">
+      <% files.forEach(file=> { %>
+        <div class="card">
+
+          <div class="card">
+            <div class="card-image">
+              <img src="/img/pdf-2127829_640.png" alt="File Icon">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">
+                <%= file %>
+              </h3>
+              <button class="btn btn-primary" onclick="openFile('<%= file %>', '<%= vehicleId %>')">Abrir</button>
+              <button class="btn btn-danger" onclick="deleteFile('<%= file %>', '<%= vehicleId %>')">Eliminar</button>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+    </div>
+    <% } else { %>
+      <h3 style="text-align: center;">No hay documentos para este vehiculo</h3>
+    <% } %>
+    <!-- Modal -->
+    <div class="modal" id="uploadModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Subir Archivo</h2>
+        </div>
+        <div class="modal-body">
+          <form action="/admin/<%= vehicleId %>/subirSeguro" id="uploadForm" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="file">Selecciona un archivo PDF (máx. 10 MB):</label>
+              <input type="file" id="file" name="file" accept=".pdf" required />
+              <p id="error-message" style="color: red;"></p>
+            </div>
+            <button type="submit" class="btn btn-primary">Subir Archivo</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/assurance.js"></script>
+</body>
+
+</html>

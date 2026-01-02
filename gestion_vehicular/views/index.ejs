@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión</title>
+  <link rel="shortcut icon" href="img/mobile-logo.png">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="css/index.css">
+  <script defer src="js/index.js"></script>
+</head>
+
+<body>
+  <div class="scroll-down">Desplaza hacia abajo
+    <i class="bx bx-chevron-down-circle"></i>
+  </div>
+  <div class="container"></div>
+  <div class="modal">
+    <div class="modal-container">
+      <div class="modal-left">
+        <h1 class="modal-title">¡ Bienvenido !</h1>
+        <p class="modal-desc">Inicia sesión para acceder a las herramientas de gestión del parque vehicular de CFE.</p>
+
+        <form action="/login" method="post">
+          <div class="input-block">
+            <label for="email" class="input-label">Correo</label>
+            <input type="email" name="email" id="email" placeholder="Correo Electronico">
+          </div>
+          <div class="input-block">
+            <label for="password" class="input-label">Contraseña</label>
+            <input type="password" name="password" id="password" placeholder="Contraseña">
+          </div>
+          <div class="modal-buttons">
+            <a href="" class="">¿Olvidó su contraseña?</a>
+            <button type="submit" class="input-button">Ingresar</button>
+          </div>
+          <div class="logo-container">
+            <img src="img/desktop-logo.png" alt="">
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-right">
+        <img src="img/bg2.jpg" alt="">
+      </div>
+      <button class="icon-button close-button">
+        <i class="bx bx-x-circle"></i>
+      </button>
+    </div>
+    <button class="modal-button">Presiona aqui para iniciar sesión</button>
+  </div>
+</body>
+
+</html>

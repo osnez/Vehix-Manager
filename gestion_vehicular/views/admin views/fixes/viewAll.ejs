@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reparaciones</title>
+  <link rel="shortcut icon" href="/img/mobile-logo.png">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- BOX ICONS -->
+  <link rel="stylesheet" href="/css/tables.css">
+</head>
+
+<body>
+  
+  <% 
+    // Función para formatear la fecha en formato 'dd/MM/yyyy'
+    function formatDate(dateString) {
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      const date = new Date(dateString);
+      return date.toLocaleDateString('es-ES', options);
+    }
+  %>
+
+  <header>
+    <a href="/admin/detalle/<%= id %>">
+      <img src="/img/mobile-logo.png" alt="" />
+    </a>
+    <a href="/admin/registrar-reparacion/<%= id %>" class="cssbuttons-io-button">
+      <i class="bx bx-plus-circle"></i>
+      <span>Programar Reparacion</span>
+    </a>
+  </header>
+  
+  <main class="container">
+    <section class="card-container">
+      <h1>Registro de reparaciones</h1>
+
+      <% if (fixes.length > 0) { %>
+        <% fixes.forEach(item => { %>
+      <div class="card">
+        <div class="image-container">
+          <img src="/img/mobile-logo.png" alt="" class="logo">
+          <img src="<%= item.foto_unidad %>" alt="Foto" class="image">
+          <h1></h1>
+        </div>
+        <div class="info-container">
+          <div class="info">
+            <h1>No. Reparacion: <%= item.idReparacion %></h1>
+            <h1>Placa: <%= item.placa %></h1>
+            <h1>Fecha de Ingreso: <%= formatDate(item.fecha_ingreso) %></h1>
+            <h1>Fecha de salida: <%= formatDate(item.fecha_salida) %></h1>
+            <p>Detalle: <%= item.detalle %></p>
+          </div>
+          <div class="buttons">
+            <h1>COSTO: $<%= item.costo %></h1>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+      <% } else { %>
+        <p>No hay reparaciones registradas.</p>
+      <% } %>
+    </section>
+  </main>
+</body>
+
+</html>

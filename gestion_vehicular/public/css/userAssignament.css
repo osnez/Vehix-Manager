@@ -1,0 +1,552 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  overflow: hidden;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  padding: 2rem, 1rem;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar {
+  width: 60px;
+  height: 90%;
+  background-color: #009c38;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 20px 0;
+  border-radius: 15px;
+  margin-left: 1rem;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.profile-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: scale 1s ease;
+}
+
+.profile-icon img:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.dropdown-menu {
+  width: 130px;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 100;
+}
+
+.dropdown-menu h3 {
+  width: 100%;
+  color: #009c38;
+  text-align: right;
+  font-size: 13px;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px 12px;
+  text-align: right;
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+.profile-icon:hover .dropdown-menu {
+  display: block;
+}
+
+.profile-icon:hover img {
+  transform: scale(110%);
+}
+
+.profile-icon:hover h1 {
+  letter-spacing: 1px;
+}
+
+.profile-icon h1 {
+  font-size: 1em;
+}
+
+.main-content {
+  height: 90%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  margin-left: 1rem
+}
+
+.vehicle-info {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.vehicle-image {
+  width: 500px;
+  height: auto;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.situacion-buena {
+  color: green;
+}
+
+.situacion-mala {
+  color: red;
+}
+
+.situacion-neutral {
+  color: gray;
+}
+
+.vehicle-details {
+  flex: 1;
+  text-align: right;
+}
+
+.vehicle-details h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.vehicle-details h2 {
+  margin-bottom: 20px;
+}
+
+.vehicle-details p {
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.vehicle-id {
+  background-color: #c6eb6b;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+  text-align: center;
+  width: fit-content;
+  color: #333;
+  margin-top: 10px;
+  position: absolute;
+  bottom: 2%;
+  right: 0;
+}
+
+.vehicle-status h2 {
+  background-color: #ebebeb;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+  border-radius: 10px;
+  padding: 7px;
+}
+
+.status-icons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+.fuel-status {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.fuel-status object {
+  width: 180px;
+  height: auto;
+}
+
+.tire-status {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.tire-status img {
+  width: 130px;
+  height: 130px;
+}
+
+
+.title {
+  width: fit-content;
+  margin-top: 1.3rem;
+  background-color: #c6eb6b;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.title2 {
+  width: fit-content;
+  margin-top: 4.7rem;
+  background-color: #c6eb6b;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Llantas */
+.tires-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.tires-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333;
+  width: 100%;
+  text-align: center;
+}
+
+.image-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 75px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.image-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.base-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.overlay-image {
+  position: absolute;
+  top: 50;
+  left: 50;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.image-item img {
+  transition: transform 0.3s;
+}
+
+.image-item:hover img {
+  transform: scale(1.1);
+}
+
+.tires-container input {
+  display: none;
+}
+
+#tire-bn1,
+#tire-bn2,
+#tire-bn3,
+#tire-bn4 {
+  filter: invert(90%);
+}
+
+#tire-color1,
+#tire-color2,
+#tire-color3,
+#tire-color4 {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.5s;
+}
+
+/* Submenú */
+.tire-submenu {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  right: 30%;
+  background-color: #4d4d4d;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  white-space: nowrap;
+  z-index: 10;
+  margin-bottom: 10px;
+  width: fit-content;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.tire-submenu h1 {
+  display: block;
+  font-size: 1em;
+  padding: 5px 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.tire-submenu a:hover {
+  background-color: #f0f0f0;
+}
+
+.image-item:hover .tire-submenu {
+  opacity: 1;
+  visibility: visible;
+}
+
+#nivel {
+  display: none;
+}
+
+/* Media Queries para Responsividad */
+
+/* Pantallas pequeñas */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 50px;
+    height: 100%;
+    padding: 10px 0;
+  }
+
+  .profile-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .profile-icon img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .main-content {
+    margin-left: 0;
+    height: 100%;
+    padding: 10px;
+    width: calc(100% - 60px);
+  }
+
+  .vehicle-info {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vehicle-id {
+    background-color: #c6eb6b;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+    width: fit-content;
+    color: #333;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 85%;
+    right: 0;
+  }
+
+  .vehicle-image {
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+  }
+
+  .vehicle-details {
+    text-align: center;
+  }
+
+  .vehicle-details h1 {
+    font-size: 1.5em;
+  }
+
+  .vehicle-details p {
+    font-size: 0.9em;
+  }
+
+  .status-icons {
+    flex-direction: column;
+  }
+
+  .fuel-status object,
+  .tire-status img {
+    width: 100px;
+  }
+
+  .title,
+  .title2 {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .tire-status {
+    flex: 1;
+  }
+
+  .tires-container {
+    padding: 10px;
+  }
+
+  .image-item img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .image-wrapper {
+    gap: 40px;
+    justify-content: center;
+  }
+}
+
+/* Pantallas muy pequeñas (móviles) */
+@media (max-width: 480px) {
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 5px 20px;
+    margin-left: 0;
+    position: fixed;
+    justify-content: right;
+    top: 0;
+    left: 0;
+    transform: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .dropdown-menu {
+    top: 100%;
+    left: 0;
+    transform: translate(-80%);
+  }
+
+  .main-content {
+    margin-left: 0;
+    margin-top: 15rem;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    box-shadow: none;
+    overflow-y: auto;
+  }
+
+  .vehicle-info {
+    flex-direction: column;
+    text-align: center;
+    /* Centrar el texto */
+  }
+
+  .vehicle-image {
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+  }
+
+  .vehicle-details {
+    text-align: center;
+  }
+
+  .vehicle-details h1 {
+    font-size: 1.2em;
+  }
+
+  .vehicle-details p {
+    font-size: 0.8em;
+  }
+
+  .status-icons {
+    flex-direction: column;
+  }
+
+  .fuel-status object,
+  .tire-status img {
+    width: 80px;
+  }
+
+  .title,
+  .title2 {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .title2{
+    margin-top: 1rem;
+  }
+
+  .tires-container {
+    padding: 10px;
+  }
+
+  .image-item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .image-wrapper {
+    gap: 20px;
+    justify-content: center;
+  }
+}

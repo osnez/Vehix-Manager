@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagina Principal</title>
+  <link rel="shortcut icon" href="/img/mobile-logo.png">
+  <!-- BOX ICONS -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="/css/mainPage.css">
+  <script defer src="/js/mainPage.js"></script>
+</head>
+
+<body>
+  <header id="header">
+    <div class="desktop-header">
+      <div class="main-header">
+        <img src="/img/desktop-logo.png" alt="" />
+      </div>
+      <div class="nav-container">
+        <nav>
+          <a href="/admin/registrar-vehiculo">Nuevo Vehiculo</a>
+          <a href="/admin/registrar-usuario">Nuevo Usuario</a>
+          <a href="/admin/propietarios">Propietarios</a>
+          <a href="/admin/asignaciones">Asignaciones</a>
+          <a href="/mi-perfil">Perfil</a>
+        </nav>
+        <a href="/logout" class="logout-button">
+          <div class="sign"><svg viewBox="0 0 512 512">
+              <path
+                d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
+              </path>
+            </svg></div>
+          <div class="text">Cerrar Sesión</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="mobile-header">
+      <img src="/img/mobile-logo.png" alt="" />
+      <input type="checkbox" id="menu" />
+      <label class="menu" for="menu">
+        <i class="bx bx-menu" id="open-menu"></i>
+        <i class="bx bx-x" id="close-menu"></i>
+      </label>
+      <nav>
+        <a href="/admin/registrar-vehiculo">Nuevo Vehiculo</a>
+        <a href="/admin/registrar-usuario">Nuevo Usuario</a>
+        <a href="/admin/propietarios">Propietarios</a>
+        <a href="/admin/asignaciones">Asignaciones</a>
+        <a href="/mi-perfil">Perfil</a>
+        <a href="/logout">Cerrar Sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="title-section">
+      <a href="/admin/" class="show-all">MOSTRAR TODO</a>
+      <h1>Vehiculos encontrados</h1>
+    </section>
+
+    <section class="items-section" id="items-container">
+      <% if (items.length> 0) { %>
+        <% items.forEach(item=> { %>
+          <!-- TARJETA -->
+          <div class="card-container">
+            <h1>
+              <%= item.num_economico %>
+            </h1>
+            <img src="<%= item.foto_unidad %>" alt="">
+            <div class="overlay">
+              <div class="items"></div>
+              <div class="items head">
+                <p>
+                  <%= item.marca + ' ' + item.submarca %>
+                </p>
+                <hr>
+              </div>
+              <div class="items plate">
+                <p>
+                  <%= item.placa %>
+                </p>
+              </div>
+              <div class="items detail" id="inspect">
+                <i class="bx bx-book-open"></i>
+                <a href="/admin/inspeccion/<%= item.num_economico %>">Realizar Inspección</a>
+              </div>
+
+              <div class="items detail">
+                <i class="bx bx-info-circle"></i>
+                <a href="/admin/detalle/<%= item.num_economico %>">Ver Detalle</a>
+              </div>
+
+              <div class="items detail">
+                <i class="bx bx-edit-alt"></i>
+                <a href="/admin/actualizar-vehiculo/<%= item.num_economico %>">Editar Informacion</a>
+              </div>
+
+              <div class="items detail">
+                <i class="bx bx-x-circle"></i>
+                <a href="/admin/eliminarVehiculo/<%= item.num_economico %>" class="delete-vehicle">Eliminar</a>
+              </div>
+
+              <!-- ALERTA DE CONFIRMACION -->
+              <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+              <script>
+                document.addEventListener('DOMContentLoaded', (event) => {
+                  // Selecciona todos los enlaces de eliminación
+                  const eliminarLinks = document.querySelectorAll('.delete-vehicle');
+
+                  eliminarLinks.forEach(link => {
+                    link.addEventListener('click', function (e) {
+                      e.preventDefault();
+
+                      const href = this.getAttribute('href');
+
+                      Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: "Esta acción eliminará el vehículo de forma permanente.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, eliminar!',
+                        cancelButtonText: 'Cancelar'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          // Redirige a la URL de eliminación si el usuario confirma
+                          window.location.href = href;
+                        }
+                      });
+                    });
+                  });
+                });
+              </script>
+
+            </div>
+          </div>
+          <% }); %>
+            <% } else { %>
+              <h1>No hay vehiculos registrados.</h1>
+              <% } %>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Parque vehicular. CFE Todos los derechos reservados.</p>
+  </footer>
+</body>
+
+</html>

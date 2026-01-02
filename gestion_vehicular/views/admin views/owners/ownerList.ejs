@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propietarios</title>
+  <link rel="shortcut icon" href="/img/mobile-logo.png">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="/css/tables.css">
+</head>
+
+<body>
+  <header>
+    <a href="/admin/" class="logo">
+      <img src="/img/mobile-logo.png" alt="" />
+    </a>
+    <a href="/admin/registrar-propietario/" class="cssbuttons-io-button">
+      <i class="bx bx-plus-circle"></i>
+      <span>Nuevo</span>
+    </a>
+  </header>
+
+  <div class="container">
+    <div class="search-bar-container">
+      <div class="search-bar">
+        <form action="#">
+          <input type="text" class="search-bar" placeholder="Buscar por nombre" />
+          <button type="submit">
+            <i class="bx bx-search-alt-2"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="card-container">
+      <h1>Lista de propietarios registrados</h1>
+      <% if (owners.length> 0) { %>
+        <% owners.forEach(owner=> { %>
+          <div class="card">
+            <div class="image-container">
+              <img src="/img/mobile-logo.png" alt="" class="logo">
+              <img src="<%= owner.foto_prop %>" alt="Foto de usuario" class="image">
+              <h1>
+                <%= owner.rol %>
+              </h1>
+            </div>
+            <div class="info-container">
+              <div class="info">
+                <h1>
+                  <%= owner.nombre_prop %>
+                </h1>
+                <h1>
+                  <%= owner.ap1_prop %>
+                </h1>
+                <h1>
+                  <%= owner.ap2_prop %>
+                </h1>
+              </div>
+              <div class="buttons">
+                <a href="/admin/actualizar-propietario/<%= owner.idPropietario %>">EDITAR INFORMACION</a>
+                <a href="/admin/eliminarPropietario/<%= owner.idPropietario %>" class="delete">ELIMINAR PROPIETARIO</a>
+              </div>
+
+              <!-- ALERTA DE CONFIRMACION -->
+              <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+              <script>
+                document.addEventListener('DOMContentLoaded', (event) => {
+                  // Selecciona todos los enlaces de eliminación
+                  const eliminarLinks = document.querySelectorAll('.delete');
+
+                  eliminarLinks.forEach(link => {
+                    link.addEventListener('click', function (e) {
+                      e.preventDefault();
+
+                      const href = this.getAttribute('href');
+
+                      Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: "Esta acción eliminará el propietario de forma permanente.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, eliminar!',
+                        cancelButtonText: 'Cancelar'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          // Redirige a la URL de eliminación si el usuario confirma
+                          window.location.href = href;
+                        }
+                      });
+                    });
+                  });
+                });
+              </script>
+
+            </div>
+          </div>
+          <% }); %>
+            <% } else { %>
+              <p>No hay propietarios registrados.</p>
+              <% } %>
+    </div>
+  </div>
+
+</body>
+
+</html>

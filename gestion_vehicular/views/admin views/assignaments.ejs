@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignacion de Vehiculos</title>
+    <link rel="shortcut icon" href="/img/mobile-logo.png">
+    <link rel="stylesheet" href="/css/assignaments.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="/js/assignaments.js"></script>
+</head>
+
+<body>
+    <a href="/admin/" class="back-button">
+        <img src="/img/mobile-logo.png" alt="">
+    </a>
+    <div class="container">
+        <div class="usuarios">
+            <h3>Usuarios Disponibles</h3>
+            <% usuarios.forEach(usuario=> { %>
+                <div id="user-<%= usuario.idUsuario %>" class="usuario" draggable="true"
+                    data-id="<%= usuario.idUsuario %>">
+                    <img src="<%= usuario.foto %>" alt="<%= usuario.nombre %>" class="foto-usuario">
+                    <p>
+                        <%= usuario.nombre %>
+                    </p>
+                </div>
+                <% }) %>
+        </div>
+
+        <div class="vehiculos">
+            <h3>Vehículos Disponibles</h3>
+            <% vehiculos.forEach(vehiculo=> { %>
+                <div id="vehiculo-<%= vehiculo.num_economico %>" class="vehiculo" draggable="true"
+                    data-id="<%= vehiculo.num_economico %>">
+                    <img src="<%= vehiculo.foto_unidad %>" alt="<%= vehiculo.modelo %>" class="foto-vehiculo">
+                    <p>
+                        <%= vehiculo.marca + ' ' + vehiculo.submarca %> - <%= vehiculo.num_economico %>
+                    </p>
+                </div>
+                <% }) %>
+        </div>
+
+        <div class="asignaciones">
+            <div class="asignaciones-list">
+                <div class="preview-area">
+                    <div id="user-preview" class="user-preview"></div>
+                    <div id="vehicle-preview" class="vehicle-preview"></div>
+                </div>
+                <h1>Arrastre un usuario y un vehiculo en el recuadro para asignarlos</h1>
+            </div>
+        </div>
+
+        <div class="asignaciones-actuales">
+            <h3>Asignaciones Actuales</h3>
+            <% asignaciones.forEach(asignacion=> { %>
+                <div class="tarjeta-asignacion">
+                    <img src="<%= asignacion.fotoUsuario %>" alt="<%= asignacion.nombre %>" class="foto-usuario">
+                    <h4>
+                        <%= asignacion.nombre + ' ' + asignacion.ap1 + ' ' + asignacion.ap2 %>
+                    </h4>
+                    <img src="<%= asignacion.fotoVehiculo %>" alt="<%= asignacion.modelo %>" class="foto-vehiculo">
+                    <p>Vehículo: <%= asignacion.num_economico %>
+                    </p>
+                    <button class="liberar-btn" data-idUsuario="<%= asignacion.idUsuario %>"
+                        data-numEconomico="<%= asignacion.num_economico %>">Liberar Asignación</button>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+
+</body>
+
+</html>

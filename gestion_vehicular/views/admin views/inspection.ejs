@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspeccion de vehiculo</title>
+  <link rel="shortcut icon" href="/img/mobile-logo.png">
+  <link rel="stylesheet" href="/css/inspection.css">
+</head>
+
+<body>
+  <a href="/admin/">
+    <img src="/img/mobile-logo.png" alt="" />
+  </a>
+
+  <div class="container">
+    <header>
+      <h1>Inspeccion de Vehiculo</h1>
+      <div class="header-info">
+        <div><strong>Fecha:</strong> <span id="fecha"></span></div>
+        <div><strong>Auditor:</strong> <%= user.nombre + ' ' + user.ap1 %> </div>
+      </div>
+    </header>
+
+    <section class="vehicle-info">
+      <h2>Datos del Vehículo</h2>
+      <div><strong>Placa: </strong><%= vehicle.placa %></div>
+      <div><strong>Marca: </strong><%= vehicle.marca %></div>
+      <div><strong>Modelo: </strong> <%= vehicle.submarca + ' ' + vehicle.modelo %></div>
+    </section>
+
+    <% if(detail) {%>
+    <form action="/admin/auditar/<%= id %>" method="post">
+      <div class="form-group">
+        <label for="estado-fisico">Estado Físico del Vehículo:</label>
+        <select id="estado-fisico" name="physical_state">
+          <option value="BUENO" <% if (detail.estado_fisico === "BUENO") { %> selected <% } %> >Bueno</option>
+          <option value="REGULAR" <% if (detail.estado_fisico === "REGULAR") { %> selected <% } %> >Regular</option>
+          <option value="MALO" <% if (detail.estado_fisico === "MALO") { %> selected <% } %> >Malo</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Nivel de Gasolina:</label>
+      </div>
+      <div class="radio-buttons-container">
+        <div class="radio-button">
+          <input name="fuel_level" id="radio1" class="radio-button__input" type="radio" value="0" <%= detail.nivel === 0 ? 'checked' : '' %> >
+          <label for="radio1" class="radio-button__label">
+            <span class="radio-button__custom"></span>
+
+            Vacio
+          </label>
+        </div>
+        <div class="radio-button">
+          <input name="fuel_level" id="radio2" class="radio-button__input" type="radio" value="35" <%= detail.nivel === 35 ? 'checked' : '' %>>
+          <label for="radio2" class="radio-button__label">
+            <span class="radio-button__custom"></span>
+
+            ¼
+          </label>
+        </div>
+        <div class="radio-button">
+          <input name="fuel_level" id="radio3" class="radio-button__input" type="radio" value="50" <%= detail.nivel === 50 ? 'checked' : '' %>>
+          <label for="radio3" class="radio-button__label">
+            <span class="radio-button__custom"></span>
+
+            ½
+          </label>
+        </div>
+
+        <div class="radio-button">
+          <input name="fuel_level" id="radio4" class="radio-button__input" type="radio" value="75" <%= detail.nivel === 75 ? 'checked' : '' %> >
+          <label for="radio4" class="radio-button__label">
+            <span class="radio-button__custom"></span>
+
+            ¾
+          </label>
+        </div>
+
+        <div class="radio-button">
+          <input name="fuel_level" id="radio5" class="radio-button__input" type="radio" value="100" <%= detail.nivel === 100 ? 'checked' : '' %>>
+          <label for="radio5" class="radio-button__label">
+            <span class="radio-button__custom"></span>
+
+            Lleno
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Estado de las Llantas:</label>
+        <div class="tires-status">
+          <div class="tire">
+            <label for="llanta-delantera-izquierda">Delantera Izquierda:</label>
+            <input type="range" id="llanta-delantera-izquierda" name="neumatic1" min="0" max="100"
+              step="10" value="<%= detail.estadoN2 %>">
+            <output for="llanta-delantera-izquierda" id="output-delantera-izquierda"><%= detail.estadoN2 %>%</output>
+          </div>
+          <div class="tire">
+            <label for="llanta-delantera-derecha">Delantera Derecha:</label>
+            <input type="range" id="llanta-delantera-derecha" name="neumatic2" min="0" max="100"
+              step="10" value="<%= detail.estadoN4 %>">
+            <output for="llanta-delantera-derecha" id="output-delantera-derecha"><%= detail.estadoN4 %>%</output>
+          </div>
+          <div class="tire">
+            <label for="llanta-trasera-izquierda">Trasera Izquierda:</label>
+            <input type="range" id="llanta-trasera-izquierda" name="neumatic3" min="0" max="100"
+              step="10" value="<%= detail.estadoN1 %>">
+            <output for="llanta-trasera-izquierda" id="output-trasera-izquierda"><%= detail.estadoN1 %>%</output>
+          </div>
+          <div class="tire">
+            <label for="llanta-trasera-derecha">Trasera Derecha:</label>
+            <input type="range" id="llanta-trasera-derecha" name="neumatic4" min="0" max="100" step="10"
+              value="<%= detail.estadoN3 %>">
+            <output for="llanta-trasera-derecha" id="output-trasera-derecha"><%= detail.estadoN3 %>%</output>
+          </div>
+        </div>
+      </div>
+    <% } else { %>
+      <form action="/admin/auditar/<%= id %>" method="post">
+        <div class="form-group">
+          <label for="estado-fisico">Estado Físico del Vehículo:</label>
+          <select id="estado-fisico" name="physical_state">
+            <option value="BUENO">Bueno</option>
+            <option value="REGULAR">Regular</option>
+            <option value="MALO">Malo</option>
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <label>Nivel de Gasolina:</label>
+        </div>
+        <div class="radio-buttons-container">
+          <div class="radio-button">
+            <input name="fuel_level" id="radio1" class="radio-button__input" type="radio" value="0">
+            <label for="radio1" class="radio-button__label">
+              <span class="radio-button__custom"></span>
+  
+              Vacio
+            </label>
+          </div>
+          <div class="radio-button">
+            <input name="fuel_level" id="radio2" class="radio-button__input" type="radio" value="35">
+            <label for="radio2" class="radio-button__label">
+              <span class="radio-button__custom"></span>
+  
+              ¼
+            </label>
+          </div>
+          <div class="radio-button">
+            <input name="fuel_level" id="radio3" class="radio-button__input" type="radio" value="50">
+            <label for="radio3" class="radio-button__label">
+              <span class="radio-button__custom"></span>
+  
+              ½
+            </label>
+          </div>
+  
+          <div class="radio-button">
+            <input name="fuel_level" id="radio4" class="radio-button__input" type="radio" value="75">
+            <label for="radio4" class="radio-button__label">
+              <span class="radio-button__custom"></span>
+  
+              ¾
+            </label>
+          </div>
+  
+          <div class="radio-button">
+            <input name="fuel_level" id="radio5" class="radio-button__input" type="radio" value="100">
+            <label for="radio5" class="radio-button__label">
+              <span class="radio-button__custom"></span>
+  
+              Lleno
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Estado de las Llantas:</label>
+          <div class="tires-status">
+            <div class="tire">
+              <label for="llanta-delantera-izquierda">Delantera Izquierda:</label>
+              <input type="range" id="llanta-delantera-izquierda" name="neumatic1" min="0" max="100"
+                step="10">
+              <output for="llanta-delantera-izquierda" id="output-delantera-izquierda">50%</output>
+            </div>
+            <div class="tire">
+              <label for="llanta-delantera-derecha">Delantera Derecha:</label>
+              <input type="range" id="llanta-delantera-derecha" name="neumatic2" min="0" max="100"
+                step="10"">
+              <output for="llanta-delantera-derecha" id="output-delantera-derecha">50%</output>
+            </div>
+            <div class="tire">
+              <label for="llanta-trasera-izquierda">Trasera Izquierda:</label>
+              <input type="range" id="llanta-trasera-izquierda" name="neumatic3" min="0" max="100"
+                step="10">
+              <output for="llanta-trasera-izquierda" id="output-trasera-izquierda">50%</output>
+            </div>
+            <div class="tire">
+              <label for="llanta-trasera-derecha">Trasera Derecha:</label>
+              <input type="range" id="llanta-trasera-derecha" name="neumatic4" min="0" max="100" step="10">
+              <output for="llanta-trasera-derecha" id="output-trasera-derecha">50%</output>
+            </div>
+          </div>
+        </div>
+    <% } %>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('fecha').textContent = new Date().toLocaleDateString();
+
+    // Actualizar los valores de las llantas al cambiar el slider
+    const sliders = [
+      { input: document.getElementById('llanta-delantera-izquierda'), output: document.getElementById('output-delantera-izquierda') },
+      { input: document.getElementById('llanta-delantera-derecha'), output: document.getElementById('output-delantera-derecha') },
+      { input: document.getElementById('llanta-trasera-izquierda'), output: document.getElementById('output-trasera-izquierda') },
+      { input: document.getElementById('llanta-trasera-derecha'), output: document.getElementById('output-trasera-derecha') }
+    ];
+
+    sliders.forEach(({ input, output }) => {
+      input.addEventListener('input', () => {
+        output.textContent = `${input.value}%`;
+      });
+    });
+  </script>
+</body>
+
+</html>
